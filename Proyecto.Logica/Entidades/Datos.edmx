@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bdCentinelaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbAsistencia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estudiante_Tarjeta_Id" Type="bigint" />
+          <Property Name="FechayHora" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbDocentes">
+          <Key>
+            <PropertyRef Name="doceId" />
+          </Key>
+          <Property Name="doceId" Type="bigint" Nullable="false" />
+          <Property Name="docePrimerNombre" Type="varchar" MaxLength="50" />
+          <Property Name="doceSegundoNombre" Type="varchar" MaxLength="50" />
+          <Property Name="docePrimerApellido" Type="varchar" MaxLength="50" />
+          <Property Name="doceSegundoApellido" Type="varchar" MaxLength="50" />
+          <Property Name="doceCedula" Type="varchar" MaxLength="50" />
+          <Property Name="doceDireccion" Type="varchar" MaxLength="50" />
+          <Property Name="doceTelefono" Type="varchar" MaxLength="50" />
+          <Property Name="doceCelular" Type="varchar" MaxLength="50" />
+          <Property Name="doceCorreo" Type="varchar" MaxLength="50" />
+          <Property Name="doceNivelAcademico" Type="varchar" MaxLength="50" />
+          <Property Name="doceArea" Type="varchar" MaxLength="50" />
+          <Property Name="doceIdAsignatura" Type="bigint" />
+        </EntityType>
+        <EntityType Name="TbEstudiante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EstPrimerNombre" Type="varchar" MaxLength="100" />
+          <Property Name="EstSegundoNombre" Type="varchar" MaxLength="100" />
+          <Property Name="EstPrimerApellido" Type="varchar" MaxLength="100" />
+          <Property Name="EstSegundoApellido" Type="varchar" MaxLength="100" />
+          <Property Name="EstDireccion" Type="varchar" MaxLength="100" />
+          <Property Name="EstTelefono" Type="varchar" MaxLength="100" />
+          <Property Name="EstGrupo" Type="varchar" MaxLength="100" />
+          <Property Name="EstEdad" Type="varchar" MaxLength="100" />
+          <Property Name="EstAcudientePrimerNombre" Type="varchar" MaxLength="100" />
+          <Property Name="EstAcudienteSegundoNombre" Type="varchar" MaxLength="100" />
+          <Property Name="EstAcudientePrimerApellido" Type="varchar" MaxLength="100" />
+          <Property Name="EstAcudienteSegundoApellido" Type="varchar" MaxLength="100" />
+          <Property Name="EstAcudienteParentesco" Type="varchar" MaxLength="100" />
+          <Property Name="EstAcudienteDireccion" Type="varchar" MaxLength="100" />
+          <Property Name="EstAcudienteCorreo" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tbEstudiante_Tarjeta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEstudiantes" Type="bigint" />
+          <Property Name="IdTarjetas" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tbGrados">
+          <Key>
+            <PropertyRef Name="graCodigo" />
+          </Key>
+          <Property Name="graCodigo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="graGrado" Type="varchar" MaxLength="30" />
+          <Property Name="graDetalle" Type="varchar" MaxLength="30" />
+          <Property Name="graNum_estudiante" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="graJornada" Type="varchar" MaxLength="30" />
+          <Property Name="graNivel" Type="varchar" MaxLength="30" />
+          <Property Name="graPlantilla" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tbTarjetas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroRfid" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tbUsuarios">
+          <Key>
+            <PropertyRef Name="usuaLogin" />
+          </Key>
+          <Property Name="usuaLogin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="usuaPassword" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_tbAsistencia_tbEstudiante_Tarjeta">
+          <End Role="tbEstudiante_Tarjeta" Type="Self.tbEstudiante_Tarjeta" Multiplicity="0..1" />
+          <End Role="tbAsistencia" Type="Self.tbAsistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEstudiante_Tarjeta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbAsistencia">
+              <PropertyRef Name="Estudiante_Tarjeta_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEstudiante_Tarjeta_TbEstudiante">
+          <End Role="TbEstudiante" Type="Self.TbEstudiante" Multiplicity="0..1" />
+          <End Role="tbEstudiante_Tarjeta" Type="Self.tbEstudiante_Tarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbEstudiante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbEstudiante_Tarjeta">
+              <PropertyRef Name="IdEstudiantes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEstudiante_Tarjeta_tbTarjetas">
+          <End Role="tbTarjetas" Type="Self.tbTarjetas" Multiplicity="0..1" />
+          <End Role="tbEstudiante_Tarjeta" Type="Self.tbEstudiante_Tarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTarjetas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbEstudiante_Tarjeta">
+              <PropertyRef Name="IdTarjetas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bdCentinelaModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbAsistencia" EntityType="Self.tbAsistencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbDocentes" EntityType="Self.tbDocentes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TbEstudiante" EntityType="Self.TbEstudiante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbEstudiante_Tarjeta" EntityType="Self.tbEstudiante_Tarjeta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbGrados" EntityType="Self.tbGrados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbTarjetas" EntityType="Self.tbTarjetas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbAsistencia_tbEstudiante_Tarjeta" Association="Self.FK_tbAsistencia_tbEstudiante_Tarjeta">
+            <End Role="tbEstudiante_Tarjeta" EntitySet="tbEstudiante_Tarjeta" />
+            <End Role="tbAsistencia" EntitySet="tbAsistencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEstudiante_Tarjeta_TbEstudiante" Association="Self.FK_tbEstudiante_Tarjeta_TbEstudiante">
+            <End Role="TbEstudiante" EntitySet="TbEstudiante" />
+            <End Role="tbEstudiante_Tarjeta" EntitySet="tbEstudiante_Tarjeta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEstudiante_Tarjeta_tbTarjetas" Association="Self.FK_tbEstudiante_Tarjeta_tbTarjetas">
+            <End Role="tbTarjetas" EntitySet="tbTarjetas" />
+            <End Role="tbEstudiante_Tarjeta" EntitySet="tbEstudiante_Tarjeta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bdCentinelaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbAsistencia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estudiante_Tarjeta_Id" Type="Int64" />
+          <Property Name="FechayHora" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbEstudiante_Tarjeta" Relationship="Self.FK_tbAsistencia_tbEstudiante_Tarjeta" FromRole="tbAsistencia" ToRole="tbEstudiante_Tarjeta" />
+        </EntityType>
+        <EntityType Name="tbDocentes">
+          <Key>
+            <PropertyRef Name="doceId" />
+          </Key>
+          <Property Name="doceId" Type="Int64" Nullable="false" />
+          <Property Name="docePrimerNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doceSegundoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="docePrimerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doceSegundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doceCedula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doceDireccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doceTelefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doceCelular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doceCorreo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doceNivelAcademico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doceArea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doceIdAsignatura" Type="Int64" />
+        </EntityType>
+        <EntityType Name="TbEstudiante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EstPrimerNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstSegundoNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstPrimerApellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstSegundoApellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstDireccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstTelefono" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstGrupo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstEdad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstAcudientePrimerNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstAcudienteSegundoNombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstAcudientePrimerApellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstAcudienteSegundoApellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstAcudienteParentesco" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstAcudienteDireccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstAcudienteCorreo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbEstudiante_Tarjeta" Relationship="Self.FK_tbEstudiante_Tarjeta_TbEstudiante" FromRole="TbEstudiante" ToRole="tbEstudiante_Tarjeta" />
+        </EntityType>
+        <EntityType Name="tbEstudiante_Tarjeta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEstudiantes" Type="Int64" />
+          <Property Name="IdTarjetas" Type="Int64" />
+          <NavigationProperty Name="tbAsistencia" Relationship="Self.FK_tbAsistencia_tbEstudiante_Tarjeta" FromRole="tbEstudiante_Tarjeta" ToRole="tbAsistencia" />
+          <NavigationProperty Name="TbEstudiante" Relationship="Self.FK_tbEstudiante_Tarjeta_TbEstudiante" FromRole="tbEstudiante_Tarjeta" ToRole="TbEstudiante" />
+          <NavigationProperty Name="tbTarjetas" Relationship="Self.FK_tbEstudiante_Tarjeta_tbTarjetas" FromRole="tbEstudiante_Tarjeta" ToRole="tbTarjetas" />
+        </EntityType>
+        <EntityType Name="tbGrados">
+          <Key>
+            <PropertyRef Name="graCodigo" />
+          </Key>
+          <Property Name="graCodigo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="graGrado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="graDetalle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="graNum_estudiante" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="graJornada" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="graNivel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="graPlantilla" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbTarjetas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroRfid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbEstudiante_Tarjeta" Relationship="Self.FK_tbEstudiante_Tarjeta_tbTarjetas" FromRole="tbTarjetas" ToRole="tbEstudiante_Tarjeta" />
+        </EntityType>
+        <EntityType Name="tbUsuarios">
+          <Key>
+            <PropertyRef Name="usuaLogin" />
+          </Key>
+          <Property Name="usuaLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuaPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_tbAsistencia_tbEstudiante_Tarjeta">
+          <End Role="tbEstudiante_Tarjeta" Type="Self.tbEstudiante_Tarjeta" Multiplicity="0..1" />
+          <End Role="tbAsistencia" Type="Self.tbAsistencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEstudiante_Tarjeta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbAsistencia">
+              <PropertyRef Name="Estudiante_Tarjeta_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEstudiante_Tarjeta_TbEstudiante">
+          <End Role="TbEstudiante" Type="Self.TbEstudiante" Multiplicity="0..1" />
+          <End Role="tbEstudiante_Tarjeta" Type="Self.tbEstudiante_Tarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TbEstudiante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbEstudiante_Tarjeta">
+              <PropertyRef Name="IdEstudiantes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEstudiante_Tarjeta_tbTarjetas">
+          <End Role="tbTarjetas" Type="Self.tbTarjetas" Multiplicity="0..1" />
+          <End Role="tbEstudiante_Tarjeta" Type="Self.tbEstudiante_Tarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTarjetas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbEstudiante_Tarjeta">
+              <PropertyRef Name="IdTarjetas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Cnx" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tbAsistencia" EntityType="Self.tbAsistencia" />
+          <EntitySet Name="tbDocentes" EntityType="Self.tbDocentes" />
+          <EntitySet Name="TbEstudiante" EntityType="Self.TbEstudiante" />
+          <EntitySet Name="tbEstudiante_Tarjeta" EntityType="Self.tbEstudiante_Tarjeta" />
+          <EntitySet Name="tbGrados" EntityType="Self.tbGrados" />
+          <EntitySet Name="tbTarjetas" EntityType="Self.tbTarjetas" />
+          <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuarios" />
+          <AssociationSet Name="FK_tbAsistencia_tbEstudiante_Tarjeta" Association="Self.FK_tbAsistencia_tbEstudiante_Tarjeta">
+            <End Role="tbEstudiante_Tarjeta" EntitySet="tbEstudiante_Tarjeta" />
+            <End Role="tbAsistencia" EntitySet="tbAsistencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEstudiante_Tarjeta_TbEstudiante" Association="Self.FK_tbEstudiante_Tarjeta_TbEstudiante">
+            <End Role="TbEstudiante" EntitySet="TbEstudiante" />
+            <End Role="tbEstudiante_Tarjeta" EntitySet="tbEstudiante_Tarjeta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEstudiante_Tarjeta_tbTarjetas" Association="Self.FK_tbEstudiante_Tarjeta_tbTarjetas">
+            <End Role="tbTarjetas" EntitySet="tbTarjetas" />
+            <End Role="tbEstudiante_Tarjeta" EntitySet="tbEstudiante_Tarjeta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bdCentinelaModelStoreContainer" CdmEntityContainer="Cnx">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="bdCentinelaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbAsistencia">
+            <EntityTypeMapping TypeName="bdCentinelaModel.tbAsistencia">
+              <MappingFragment StoreEntitySet="tbAsistencia">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Estudiante_Tarjeta_Id" ColumnName="Estudiante_Tarjeta_Id" />
+                <ScalarProperty Name="FechayHora" ColumnName="FechayHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbDocentes">
+            <EntityTypeMapping TypeName="bdCentinelaModel.tbDocentes">
+              <MappingFragment StoreEntitySet="tbDocentes">
+                <ScalarProperty Name="doceId" ColumnName="doceId" />
+                <ScalarProperty Name="docePrimerNombre" ColumnName="docePrimerNombre" />
+                <ScalarProperty Name="doceSegundoNombre" ColumnName="doceSegundoNombre" />
+                <ScalarProperty Name="docePrimerApellido" ColumnName="docePrimerApellido" />
+                <ScalarProperty Name="doceSegundoApellido" ColumnName="doceSegundoApellido" />
+                <ScalarProperty Name="doceCedula" ColumnName="doceCedula" />
+                <ScalarProperty Name="doceDireccion" ColumnName="doceDireccion" />
+                <ScalarProperty Name="doceTelefono" ColumnName="doceTelefono" />
+                <ScalarProperty Name="doceCelular" ColumnName="doceCelular" />
+                <ScalarProperty Name="doceCorreo" ColumnName="doceCorreo" />
+                <ScalarProperty Name="doceNivelAcademico" ColumnName="doceNivelAcademico" />
+                <ScalarProperty Name="doceArea" ColumnName="doceArea" />
+                <ScalarProperty Name="doceIdAsignatura" ColumnName="doceIdAsignatura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TbEstudiante">
+            <EntityTypeMapping TypeName="bdCentinelaModel.TbEstudiante">
+              <MappingFragment StoreEntitySet="TbEstudiante">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EstPrimerNombre" ColumnName="EstPrimerNombre" />
+                <ScalarProperty Name="EstSegundoNombre" ColumnName="EstSegundoNombre" />
+                <ScalarProperty Name="EstPrimerApellido" ColumnName="EstPrimerApellido" />
+                <ScalarProperty Name="EstSegundoApellido" ColumnName="EstSegundoApellido" />
+                <ScalarProperty Name="EstDireccion" ColumnName="EstDireccion" />
+                <ScalarProperty Name="EstTelefono" ColumnName="EstTelefono" />
+                <ScalarProperty Name="EstGrupo" ColumnName="EstGrupo" />
+                <ScalarProperty Name="EstEdad" ColumnName="EstEdad" />
+                <ScalarProperty Name="EstAcudientePrimerNombre" ColumnName="EstAcudientePrimerNombre" />
+                <ScalarProperty Name="EstAcudienteSegundoNombre" ColumnName="EstAcudienteSegundoNombre" />
+                <ScalarProperty Name="EstAcudientePrimerApellido" ColumnName="EstAcudientePrimerApellido" />
+                <ScalarProperty Name="EstAcudienteSegundoApellido" ColumnName="EstAcudienteSegundoApellido" />
+                <ScalarProperty Name="EstAcudienteParentesco" ColumnName="EstAcudienteParentesco" />
+                <ScalarProperty Name="EstAcudienteDireccion" ColumnName="EstAcudienteDireccion" />
+                <ScalarProperty Name="EstAcudienteCorreo" ColumnName="EstAcudienteCorreo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbEstudiante_Tarjeta">
+            <EntityTypeMapping TypeName="bdCentinelaModel.tbEstudiante_Tarjeta">
+              <MappingFragment StoreEntitySet="tbEstudiante_Tarjeta">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdEstudiantes" ColumnName="IdEstudiantes" />
+                <ScalarProperty Name="IdTarjetas" ColumnName="IdTarjetas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbGrados">
+            <EntityTypeMapping TypeName="bdCentinelaModel.tbGrados">
+              <MappingFragment StoreEntitySet="tbGrados">
+                <ScalarProperty Name="graCodigo" ColumnName="graCodigo" />
+                <ScalarProperty Name="graGrado" ColumnName="graGrado" />
+                <ScalarProperty Name="graDetalle" ColumnName="graDetalle" />
+                <ScalarProperty Name="graNum_estudiante" ColumnName="graNum_estudiante" />
+                <ScalarProperty Name="graJornada" ColumnName="graJornada" />
+                <ScalarProperty Name="graNivel" ColumnName="graNivel" />
+                <ScalarProperty Name="graPlantilla" ColumnName="graPlantilla" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbTarjetas">
+            <EntityTypeMapping TypeName="bdCentinelaModel.tbTarjetas">
+              <MappingFragment StoreEntitySet="tbTarjetas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NumeroRfid" ColumnName="NumeroRfid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbUsuarios">
+            <EntityTypeMapping TypeName="bdCentinelaModel.tbUsuarios">
+              <MappingFragment StoreEntitySet="tbUsuarios">
+                <ScalarProperty Name="usuaLogin" ColumnName="usuaLogin" />
+                <ScalarProperty Name="usuaPassword" ColumnName="usuaPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

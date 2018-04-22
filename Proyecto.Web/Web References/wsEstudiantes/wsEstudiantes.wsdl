@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="insertarEstudiante">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="estudiante" type="tns:TbEstudiante" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TbEstudiante">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstPrimerNombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstSegundoNombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstPrimerApellido" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstSegundoApellido" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstDireccion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstTelefono" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstGrupo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstEdad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstAcudientePrimerNombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstAcudienteSegundoNombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstAcudientePrimerApellido" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstAcudienteSegundoApellido" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstAcudienteParentesco" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstAcudienteDireccion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstAcudienteCorreo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tbEstudiante_Tarjeta" type="tns:ArrayOfTbEstudiante_Tarjeta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTbEstudiante_Tarjeta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="tbEstudiante_Tarjeta" nillable="true" type="tns:tbEstudiante_Tarjeta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="tbEstudiante_Tarjeta">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdEstudiantes" nillable="true" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="IdTarjetas" nillable="true" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="tbAsistencia" type="tns:ArrayOfTbAsistencia" />
+          <s:element minOccurs="0" maxOccurs="1" name="TbEstudiante" type="tns:TbEstudiante" />
+          <s:element minOccurs="0" maxOccurs="1" name="tbTarjetas" type="tns:tbTarjetas" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTbAsistencia">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="tbAsistencia" nillable="true" type="tns:tbAsistencia" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="tbAsistencia">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="Estudiante_Tarjeta_Id" nillable="true" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="FechayHora" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="tbEstudiante_Tarjeta" type="tns:tbEstudiante_Tarjeta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="tbTarjetas">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroRfid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tbEstudiante_Tarjeta" type="tns:ArrayOfTbEstudiante_Tarjeta" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="insertarEstudianteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="insertarEstudianteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actualizarEstudiante">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="estudiante" type="tns:TbEstudiante" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actualizarEstudianteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="actualizarEstudianteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetListResult" type="tns:ArrayOfTbEstudiante" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTbEstudiante">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TbEstudiante" nillable="true" type="tns:TbEstudiante" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="insertarEstudianteSoapIn">
+    <wsdl:part name="parameters" element="tns:insertarEstudiante" />
+  </wsdl:message>
+  <wsdl:message name="insertarEstudianteSoapOut">
+    <wsdl:part name="parameters" element="tns:insertarEstudianteResponse" />
+  </wsdl:message>
+  <wsdl:message name="actualizarEstudianteSoapIn">
+    <wsdl:part name="parameters" element="tns:actualizarEstudiante" />
+  </wsdl:message>
+  <wsdl:message name="actualizarEstudianteSoapOut">
+    <wsdl:part name="parameters" element="tns:actualizarEstudianteResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetList" />
+  </wsdl:message>
+  <wsdl:message name="GetListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="wsEstudiantesSoap">
+    <wsdl:operation name="insertarEstudiante">
+      <wsdl:input message="tns:insertarEstudianteSoapIn" />
+      <wsdl:output message="tns:insertarEstudianteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="actualizarEstudiante">
+      <wsdl:input message="tns:actualizarEstudianteSoapIn" />
+      <wsdl:output message="tns:actualizarEstudianteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetList">
+      <wsdl:input message="tns:GetListSoapIn" />
+      <wsdl:output message="tns:GetListSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wsEstudiantesSoap" type="tns:wsEstudiantesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="insertarEstudiante">
+      <soap:operation soapAction="http://tempuri.org/insertarEstudiante" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarEstudiante">
+      <soap:operation soapAction="http://tempuri.org/actualizarEstudiante" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetList">
+      <soap:operation soapAction="http://tempuri.org/GetList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="wsEstudiantesSoap12" type="tns:wsEstudiantesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="insertarEstudiante">
+      <soap12:operation soapAction="http://tempuri.org/insertarEstudiante" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarEstudiante">
+      <soap12:operation soapAction="http://tempuri.org/actualizarEstudiante" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetList">
+      <soap12:operation soapAction="http://tempuri.org/GetList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wsEstudiantes">
+    <wsdl:port name="wsEstudiantesSoap" binding="tns:wsEstudiantesSoap">
+      <soap:address location="http://localhost/Proyecto.Ws/Servicios/wsEstudiantes.asmx" />
+    </wsdl:port>
+    <wsdl:port name="wsEstudiantesSoap12" binding="tns:wsEstudiantesSoap12">
+      <soap12:address location="http://localhost/Proyecto.Ws/Servicios/wsEstudiantes.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

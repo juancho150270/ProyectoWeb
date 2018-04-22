@@ -1,0 +1,67 @@
+CREATE TABLE Tb_Estudiante(
+RFID NUMERIC PRIMARY KEY,
+Est_PrimerNombre VARCHAR(50),
+Est_SegundoNombre VARCHAR(50),
+Est_PrimerApellido VARCHAR(50),
+Est_SegundoApellido VARCHAR(50),
+Est_Direccion VARCHAR(50),
+Est_Telefono VARCHAR(50),
+Est_Grupo VARCHAR(50),
+Est_Edad VARCHAR(50),
+Est_AcudientePrimerNombre  VARCHAR(50),
+Est_AcudienteSegundoNombre VARCHAR(50),
+Est_AcudientePrimerApellido VARCHAR(50),
+Est_AcudienteSegundoApellido VARCHAR(50),
+Est_AcudienteParentesco VARCHAR(50),
+Est_AcudienteDireccion VARCHAR(50),
+Est_AcudienteCorreo VARCHAR(50)
+)
+
+
+CREATE TABLE Tb_Profesores(
+Pro_Cedula NUMERIC PRIMARY KEY,
+Pro_PrimerNombre VARCHAR(50),
+Pro_SegundoNombre VARCHAR(50),
+Pro_PrimerApellido VARCHAR(50),
+Pro_SegundoApellido VARCHAR(50),
+Pro_Direccion VARCHAR(50),
+Pro_Telefono VARCHAR(50),
+Pro_Correo VARCHAR(50),
+Pro_Nivel Academico VARCHAR(50),
+Pro_Area_De_Conocimiento VARCHAR(50),
+Pro_ID_AsIGNATURA NUMERIC
+)
+
+CREATE TABLE Tb_Asigantura(
+Asi_ID_Asignatura Numeric Primary key,
+Asi_Descripcion VARCHAR(50),
+Asi_Salon VARCHAR(50),
+Asi_ID_Profesor Numeric
+)
+
+CREATE TABLE Tb_Grupos(
+Gru_ID_Grupo Numeric Primary key,
+Gru_Descripcion VARCHAR(50),
+Gru_Director_de_Grupo Numeric
+)
+
+CREATE TABLE Tb_Control_Asistencia(
+Cont_ID_control Numeric Primary key,
+Cont_ID_RFID Numeric,
+Cont_Fecha_Ingreso VARCHAR(50),
+Cont_Fecha_Salidad VARCHAR(50)
+)
+
+CREATE TABLE Tb_Verificacion_Asistencia(
+Very_ID_control Numeric,
+Very_ID_RFID Numeric,
+Very_ID_Asignatura Numeric,
+Very_ID_Grupo Numeric
+)
+
+CREATE TABLE Tb_Usuario(
+Usu_USUARIO Varchar(50),
+Usu_Contraseña Varchar(50)
+)
+
+

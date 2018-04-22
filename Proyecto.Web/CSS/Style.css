@@ -1,0 +1,14 @@
+﻿.modalPopupBG {
+    background-color: gray;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+
+.modalPopup {
+    background-color: White;
+    border-width: 3px;
+    border-style: solid;
+    border-color: Gray;
+    padding: 3px;
+}
+}
